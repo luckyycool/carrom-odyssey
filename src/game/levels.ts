@@ -30,7 +30,7 @@ export function getLevel(levelNumber: number): LevelData {
       title: 'Queen & White Pucks',
       themeDesc: 'Classic Carrom! Pocket the Ruby Queen (center) and 2 White pucks.',
       boardScale: 1.0,
-      friction: 0.968,
+      friction: 0.976,
       globalGravity: { x: 0, y: 0 },
       magnets: [],
       obstacles: [],
@@ -53,7 +53,7 @@ export function getLevel(levelNumber: number): LevelData {
       title: 'Expanding Horizon',
       themeDesc: 'The board has grown larger! Pocket the Queen and 3 White pucks.',
       boardScale: 1.15,
-      friction: 0.968,
+      friction: 0.976,
       globalGravity: { x: 0, y: 0 },
       magnets: [],
       obstacles: [],
@@ -75,7 +75,7 @@ export function getLevel(levelNumber: number): LevelData {
       title: 'Downstairs Magnetic Pull',
       themeDesc: 'A magnetic field at the bottom curves all bank shots downwards!',
       boardScale: 1.0,
-      friction: 0.968,
+      friction: 0.976,
       globalGravity: { x: 0, y: 140 }, // Strong downstairs pull
       magnets: [
         { id: 1, x: 300, y: 550, strength: 3.0, radius: 250 }
@@ -100,7 +100,7 @@ export function getLevel(levelNumber: number): LevelData {
       title: 'Center Singularity',
       themeDesc: 'The center circle has an intense magnetic vortex pulling inward!',
       boardScale: 1.05,
-      friction: 0.968,
+      friction: 0.976,
       globalGravity: { x: 0, y: 0 },
       magnets: [
         { id: 1, x: c, y: c, strength: 3.5, radius: 260 }
@@ -126,7 +126,7 @@ export function getLevel(levelNumber: number): LevelData {
       title: 'Quad Magnetic Storm',
       themeDesc: 'Magnets on all 4 quadrants! Pocket the Ruby Queen and her guards.',
       boardScale: 1.1,
-      friction: 0.968,
+      friction: 0.976,
       globalGravity: { x: 0, y: 0 },
       magnets: [
         { id: 1, x: 120, y: 120, strength: 2.2, radius: 200 },
@@ -212,7 +212,7 @@ export function getLevel(levelNumber: number): LevelData {
     title,
     themeDesc: `${hasDownstairsGravity ? 'Downstairs Gravity + ' : ''}${hasCenterMagnet ? 'Center Magnet + ' : ''}${hasBumpers ? 'Pinball Bumpers + ' : ''}Clear Queen & ${remaining} Whites!`,
     boardScale: scale,
-    friction: isSuperSlick ? 0.982 : 0.968,
+    friction: isSuperSlick ? 0.985 : 0.976,
     globalGravity: hasDownstairsGravity ? { x: 0, y: 120 } : { x: 0, y: 0 },
     magnets,
     obstacles,

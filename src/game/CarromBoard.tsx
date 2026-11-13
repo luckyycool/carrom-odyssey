@@ -844,10 +844,10 @@ export const CarromBoard: React.FC<CarromBoardProps> = ({
         const clampedPull = Math.min(pullDist, maxPull);
         const powerRatio = clampedPull / maxPull;
 
-        // Calibrated realistic tournament carrom strike speed (prevents multi-wall chaos & leaves upgrade headroom)
+        // Authentic tournament striker strike speed (smoothly ranges from 2.5 to 24.5 px/frame)
         const levelSpeedBonus = 1 + (strikerLevel - 1) * 0.03; // Gentle 3% per level
-        const maxStrikerSpeed = (activeStrikerSkin.trait === '+30% Mass' ? 14.0 : 15.2) * (isPowderActive ? levelSpeedBonus : 0.9);
-        const speed = 1.8 + Math.pow(powerRatio, 1.25) * (maxStrikerSpeed - 1.8);
+        const maxStrikerSpeed = (activeStrikerSkin.trait === '+30% Mass' ? 22.5 : 24.5) * (isPowderActive ? levelSpeedBonus : 0.88);
+        const speed = 2.5 + Math.pow(powerRatio, 1.05) * (maxStrikerSpeed - 2.5);
 
         striker.vx = (dx / pullDist) * speed;
         striker.vy = (dy / pullDist) * speed;
@@ -1284,9 +1284,9 @@ export const CarromBoard: React.FC<CarromBoardProps> = ({
     const strikerRadius = 21;
     const isLaser = activeStrikerSkin.id === 'laser_pointer' && isPowderActive;
     const aimLevelMultiplier = 1 + (strikerLevel - 1) * 0.12;
-    // Calibrated aim guide: Base reticle (~75-160px). Upgraded / Powder active extends raycast!
-    const baseRange = isPowderActive ? (75 + powerRatio * 85) * aimLevelMultiplier : 65 + powerRatio * 45;
-    const totalRange = isLaser ? 750 : baseRange;
+    // Calibrated aim guide: shows responsive path from close taps to full board reaches
+    const baseRange = isPowderActive ? (120 + powerRatio * 180) * aimLevelMultiplier : 95 + powerRatio * 90;
+    const totalRange = isLaser ? 800 : baseRange;
 
     // Inner cushion collision boundaries (aligns exactly with PhysicsEngine margin)
     const cushionMargin = engine.margin;
@@ -1523,28 +1523,17 @@ export const CarromBoard: React.FC<CarromBoardProps> = ({
           </div>
         </div>
 
-        {/* Center: Queen Badge if present */}
-        {currentLevel.pucks.some(p => p.type === 'queen') && (
-          <div
-            className={`flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold ${
-              queenState === 'covered'
-                ? 'bg-emerald-950/80 border border-emerald-500/60 text-emerald-300 shadow-sm'
-                : queenState === 'pending_cover'
-                ? 'bg-rose-950/90 border border-rose-500 animate-pulse text-rose-300 shadow-glow-gold'
-                : 'bg-purple-950/70 border border-purple-800/40 text-amber-300'
-            }`}
-          >
-            <Crown
-              size={11}
-              className={queenState === 'pending_cover' ? 'text-rose-400' : 'text-yellow-400'}
-            />
-            <span>
-              {queenState === 'covered'
-                ? 'Covered'
-                : queenState === 'pending_cover'
-                ? 'COVER QUEEN!'
-                : 'Queen Active'}
-            </span>
+        {/* Center: Actionable Queen Cover Alert ONLY when Queen is pocketed */}
+        {queenState === 'pending_cover' && (
+          <div className="flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-black bg-rose-950/90 border border-rose-500 animate-pulse text-rose-200 shadow-[0_0_15px_rgba(244,63,94,0.6)]">
+            <Crown size={12} className="text-yellow-400" />
+            <span>COVER QUEEN (POCKET ANY PUCK)</span>
+          </div>
+        )}
+        {queenState === 'covered' && (
+          <div className="flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-black bg-emerald-950/80 border border-emerald-500/60 text-emerald-300 shadow-sm">
+            <Crown size={11} className="text-yellow-400" />
+            <span>Queen Secured</span>
           </div>
         )}
 

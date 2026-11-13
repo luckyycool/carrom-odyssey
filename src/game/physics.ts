@@ -56,7 +56,7 @@ export class PhysicsEngine {
   public magnets: Magnet[] = [];
   public obstacles: Obstacle[] = [];
   public globalGravity: Vector2D = { x: 0, y: 0 };
-  public friction: number = 0.968; // Natural carrom powder sliding friction
+  public friction: number = 0.976; // Authentic tournament carrom powder glide
 
   private idCounter: number = 0;
 
