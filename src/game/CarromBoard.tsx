@@ -19,8 +19,6 @@ import {
   Play,
   Home,
   Gift,
-  Volume2,
-  VolumeX,
   Settings,
 } from 'lucide-react';
 
@@ -36,8 +34,6 @@ export interface CarromBoardProps {
   onConsumePowder?: () => void;
   coins?: number;
   stars?: number;
-  isMuted?: boolean;
-  onToggleMute?: () => void;
   onOpenSettings?: () => void;
   onWinLevel: (level: number, strikesRemaining: number, score: number) => void;
   onRestartLevel: () => void;
@@ -56,8 +52,6 @@ export const CarromBoard: React.FC<CarromBoardProps> = ({
   strikerLevel = 1,
   isProUser = false,
   onConsumePowder,
-  isMuted,
-  onToggleMute,
   onOpenSettings,
   onWinLevel,
   onRestartLevel,
@@ -1694,20 +1688,6 @@ export const CarromBoard: React.FC<CarromBoardProps> = ({
                 <span>RESTART LEVEL</span>
               </button>
 
-              {/* Sound Quick Toggle inside Pause Menu */}
-              {onToggleMute && (
-                <button
-                  onClick={() => {
-                    triggerHaptic.light();
-                    onToggleMute();
-                  }}
-                  className="w-full py-2.5 rounded-2xl bg-[#1e1735] border border-purple-800/60 text-gray-300 font-bold text-xs flex items-center justify-center gap-2 active:scale-95 transition-all"
-                >
-                  {isMuted ? <VolumeX size={15} className="text-rose-400" /> : <Volume2 size={15} className="text-emerald-400" />}
-                  <span>Audio SFX: {isMuted ? 'MUTED' : 'ENABLED'}</span>
-                </button>
-              )}
-
               {/* Settings modal shortcut */}
               {onOpenSettings && (
                 <button
@@ -1715,10 +1695,10 @@ export const CarromBoard: React.FC<CarromBoardProps> = ({
                     triggerHaptic.light();
                     onOpenSettings();
                   }}
-                  className="w-full py-2 rounded-2xl bg-[#1e1735]/80 border border-purple-800/40 text-gray-400 hover:text-white font-medium text-xs flex items-center justify-center gap-1.5"
+                  className="w-full py-2.5 rounded-2xl bg-[#1e1735] border border-purple-800/60 text-gray-200 hover:text-white font-bold text-xs flex items-center justify-center gap-1.5 active:scale-95 transition-all shadow-sm"
                 >
-                  <Settings size={14} />
-                  <span>Game Settings</span>
+                  <Settings size={15} className="text-amber-400" />
+                  <span>GAME SETTINGS</span>
                 </button>
               )}
 

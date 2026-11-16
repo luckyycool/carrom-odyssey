@@ -52,15 +52,6 @@ export default function App() {
     setHapticsIntensity(data.settings.hapticsIntensity);
   }, [data.settings]);
 
-  // Audio Mute toggle
-  const handleToggleMute = () => {
-    const muted = sounds.toggleMute();
-    setData(prev => ({
-      ...prev,
-      settings: { ...prev.settings, sfxVolume: muted ? 0 : 0.8 },
-    }));
-  };
-
   // Settings update
   const handleUpdateSettings = (newSettings: PlayerSettings) => {
     setData(prev => ({ ...prev, settings: newSettings }));
@@ -366,8 +357,6 @@ export default function App() {
           coins={data.coins}
           stars={totalStars}
           level={data.currentLevel}
-          isMuted={sounds.getMuted()}
-          onToggleMute={handleToggleMute}
           onOpenSettings={() => setShowSettings(true)}
           onOpenShop={() => setActiveScreen('shop')}
         />
@@ -437,8 +426,6 @@ export default function App() {
             onConsumePowder={() => handleConsumeStrikerCharge(data.selectedStriker)}
             coins={data.coins}
             stars={totalStars}
-            isMuted={sounds.getMuted()}
-            onToggleMute={handleToggleMute}
             onOpenSettings={() => setShowSettings(true)}
             onWinLevel={handleWinLevel}
             onRestartLevel={() => setGameKey(prev => prev + 1)}

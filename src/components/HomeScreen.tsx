@@ -62,7 +62,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               </span>
             </div>
             <p className="text-[11px] text-amber-100/80 font-medium">
-              World 1: Heritage Arena • <span className="text-yellow-400 font-bold">★ {stars} Stars</span>
+              Max Unlocked: <span className="text-amber-300 font-bold">Stage {unlockedLevel}</span> • <span className="text-yellow-400 font-bold">★ {stars} Stars</span>
             </p>
           </div>
         </div>
@@ -124,11 +124,14 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         {/* Level Progression Label */}
         <div className="text-center z-10 mb-2">
           <span className="text-[10px] font-black tracking-widest uppercase text-amber-400 px-3 py-0.5 rounded-full bg-amber-950/80 border border-amber-500/40">
-            WORLD 1 • MAX UNLOCKED: LV {unlockedLevel}
+            {currentLevel <= 50 ? 'WORLD 1 • HERITAGE CLUB' :
+             currentLevel <= 150 ? 'WORLD 2 • MAGNETIC FLUX' :
+             currentLevel <= 300 ? 'WORLD 3 • GLAZED MARBLE' :
+             currentLevel <= 500 ? 'WORLD 4 • PINBALL BUMPERS' :
+             currentLevel <= 750 ? 'WORLD 5 • SINGULARITY VORTEX' : 'WORLD 6 • GRANDMASTER'}
           </span>
-          <h2 className="text-2xl font-black text-white mt-1 drop-shadow-md">
-            Level {currentLevel}{' '}
-            <span className="text-xs text-amber-300/80 font-bold">/ 999 Levels</span>
+          <h2 className="text-3xl font-black text-transparent bg-clip-text bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-300 mt-1 drop-shadow-md tracking-wider">
+            STAGE {currentLevel}
           </h2>
         </div>
 
@@ -141,7 +144,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           className="btn-candy w-full py-4 rounded-2xl bg-gradient-to-r from-amber-400 via-orange-500 to-yellow-400 text-amber-950 font-black text-lg shadow-[0_6px_0_#9a3412,0_12px_24px_rgba(245,158,11,0.45)] flex items-center justify-center gap-2 active:translate-y-1 active:shadow-[0_2px_0_#9a3412] transition-all z-10"
         >
           <Play size={22} fill="#451a03" className="stroke-[2.5]" />
-          <span>PLAY LEVEL {currentLevel}</span>
+          <span>PLAY STAGE {currentLevel}</span>
         </button>
       </div>
 
@@ -166,7 +169,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 </span>
               )}
             </div>
-            <p className="text-[10px] text-gray-300">Win up to 500 Coins & Powder Refills Daily</p>
+            <p className="text-[10px] text-gray-300 font-medium">Daily Prize Wheel • Coins & Powder</p>
           </div>
         </div>
         <span className="text-[11px] font-black text-amber-300 px-2.5 py-1 rounded-xl bg-amber-950/80 border border-amber-500/40">
@@ -179,7 +182,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         <div className="flex items-center justify-between">
           <h3 className="text-xs font-black text-amber-300 uppercase tracking-wider flex items-center gap-1.5">
             <Sparkles size={14} className="text-amber-400" />
-            Festive Game Modes
+            Game Modes
           </h3>
           <span className="text-[10px] font-bold text-gray-400">All Unlocked</span>
         </div>
@@ -191,19 +194,19 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               triggerHaptic.light();
               onStartPassAndPlay();
             }}
-            className="p-3.5 rounded-2xl bg-gradient-to-br from-[#2b1016] to-[#170a0e] border border-rose-700/40 hover:border-rose-500/70 text-left transition-all active:scale-95 flex flex-col justify-between min-h-[105px] shadow-md group relative overflow-hidden"
+            className="p-3.5 rounded-2xl bg-gradient-to-br from-[#2b1016] to-[#170a0e] border border-rose-700/40 hover:border-rose-500/70 text-left transition-all active:scale-95 flex flex-col justify-between min-h-[92px] shadow-md group relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-16 h-16 bg-rose-500/10 rounded-full blur-xl pointer-events-none" />
             <div className="flex justify-between items-start z-10">
               <div>
                 <span className="text-xs font-black text-rose-200 group-hover:text-white">1v1 Pass & Play</span>
-                <p className="text-[9px] text-rose-400 font-extrabold uppercase mt-0.5">LOCAL TABLE</p>
+                <p className="text-[9px] text-rose-400 font-extrabold uppercase mt-0.5">LOCAL 2P</p>
               </div>
               <div className="w-8 h-8 rounded-xl bg-rose-600/25 border border-rose-500/40 text-rose-300 flex items-center justify-center shadow-sm">
                 <Users size={16} />
               </div>
             </div>
-            <p className="text-[10px] text-gray-300/90 leading-tight z-10">Two players on 1 phone with official ICF scoring</p>
+            <p className="text-[10px] text-gray-300 font-semibold z-10">Two Players • One Device</p>
           </button>
 
           {/* AI Practice Duel */}
@@ -212,19 +215,19 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               triggerHaptic.light();
               onStartAiMatch();
             }}
-            className="p-3.5 rounded-2xl bg-gradient-to-br from-[#0c1f2d] to-[#07111a] border border-cyan-700/40 hover:border-cyan-500/70 text-left transition-all active:scale-95 flex flex-col justify-between min-h-[105px] shadow-md group relative overflow-hidden"
+            className="p-3.5 rounded-2xl bg-gradient-to-br from-[#0c1f2d] to-[#07111a] border border-cyan-700/40 hover:border-cyan-500/70 text-left transition-all active:scale-95 flex flex-col justify-between min-h-[92px] shadow-md group relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-16 h-16 bg-cyan-500/10 rounded-full blur-xl pointer-events-none" />
             <div className="flex justify-between items-start z-10">
               <div>
                 <span className="text-xs font-black text-cyan-200 group-hover:text-white">AI Match Duel</span>
-                <p className="text-[9px] text-cyan-400 font-extrabold uppercase mt-0.5">SMART AI RIVAL</p>
+                <p className="text-[9px] text-cyan-400 font-extrabold uppercase mt-0.5">VS SMART BOT</p>
               </div>
               <div className="w-8 h-8 rounded-xl bg-cyan-600/25 border border-cyan-500/40 text-cyan-300 flex items-center justify-center shadow-sm">
                 <Bot size={16} />
               </div>
             </div>
-            <p className="text-[10px] text-gray-300/90 leading-tight z-10">Duel smart AI across Rookie, Pro & Master tiers</p>
+            <p className="text-[10px] text-gray-300 font-semibold z-10">3 Difficulty Tiers</p>
           </button>
 
           {/* Daily Trickshot */}
@@ -233,7 +236,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               triggerHaptic.light();
               onStartDailyTrickshot();
             }}
-            className="p-3.5 rounded-2xl bg-gradient-to-br from-[#0e2617] to-[#08150d] border border-emerald-600/40 hover:border-emerald-500/70 text-left transition-all active:scale-95 flex flex-col justify-between min-h-[105px] shadow-md group relative overflow-hidden"
+            className="p-3.5 rounded-2xl bg-gradient-to-br from-[#0e2617] to-[#08150d] border border-emerald-600/40 hover:border-emerald-500/70 text-left transition-all active:scale-95 flex flex-col justify-between min-h-[92px] shadow-md group relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-16 h-16 bg-emerald-500/10 rounded-full blur-xl pointer-events-none" />
             <div className="flex justify-between items-start z-10">
@@ -245,7 +248,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
                 <Calendar size={16} />
               </div>
             </div>
-            <p className="text-[10px] text-gray-300/90 leading-tight z-10">1 global puzzle daily • Build win streak bonuses</p>
+            <p className="text-[10px] text-gray-300 font-semibold z-10">Daily Puzzle Challenge</p>
           </button>
 
           {/* Zen Sandbox Practice */}
@@ -254,19 +257,19 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               triggerHaptic.light();
               onStartZenMode();
             }}
-            className="p-3.5 rounded-2xl bg-gradient-to-br from-[#25102d] to-[#130718] border border-purple-600/40 hover:border-purple-500/70 text-left transition-all active:scale-95 flex flex-col justify-between min-h-[105px] shadow-md group relative overflow-hidden"
+            className="p-3.5 rounded-2xl bg-gradient-to-br from-[#25102d] to-[#130718] border border-purple-600/40 hover:border-purple-500/70 text-left transition-all active:scale-95 flex flex-col justify-between min-h-[92px] shadow-md group relative overflow-hidden"
           >
             <div className="absolute top-0 right-0 w-16 h-16 bg-purple-500/10 rounded-full blur-xl pointer-events-none" />
             <div className="flex justify-between items-start z-10">
               <div>
                 <span className="text-xs font-black text-purple-200 group-hover:text-white">Zen Free-Play</span>
-                <p className="text-[9px] text-purple-400 font-extrabold uppercase mt-0.5">NO TIME LIMIT</p>
+                <p className="text-[9px] text-purple-400 font-extrabold uppercase mt-0.5">FREE PLAY</p>
               </div>
               <div className="w-8 h-8 rounded-xl bg-purple-600/25 border border-purple-500/40 text-purple-300 flex items-center justify-center shadow-sm">
                 <Zap size={16} />
               </div>
             </div>
-            <p className="text-[10px] text-gray-300/90 leading-tight z-10">Infinite strikes • Master trickshots and bank angles</p>
+            <p className="text-[10px] text-gray-300 font-semibold z-10">Unlimited Practice Strikes</p>
           </button>
         </div>
       </div>

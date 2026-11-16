@@ -1,12 +1,10 @@
 import React from 'react';
-import { Volume2, VolumeX, Settings, Plus } from 'lucide-react';
+import { Settings, Plus } from 'lucide-react';
 
 interface HeaderBarProps {
   coins: number;
   stars: number;
   level: number;
-  isMuted: boolean;
-  onToggleMute: () => void;
   onOpenSettings: () => void;
   onOpenShop: () => void;
 }
@@ -15,8 +13,6 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
   coins,
   stars,
   level,
-  isMuted,
-  onToggleMute,
   onOpenSettings,
   onOpenShop,
 }) => {
@@ -59,20 +55,13 @@ export const HeaderBar: React.FC<HeaderBarProps> = ({
           </div>
         </button>
 
-        {/* Audio Mute Button */}
-        <button
-          onClick={onToggleMute}
-          className="p-2 rounded-xl bg-purple-950/60 border border-purple-800/40 text-purple-200 active:scale-95 transition-all"
-        >
-          {isMuted ? <VolumeX size={15} /> : <Volume2 size={15} />}
-        </button>
-
         {/* Settings Button */}
         <button
           onClick={onOpenSettings}
-          className="p-2 rounded-xl bg-purple-950/60 border border-purple-800/40 text-purple-200 active:scale-95 transition-all"
+          className="p-2 rounded-xl bg-purple-950/60 border border-purple-800/40 text-purple-200 hover:text-amber-300 active:scale-95 transition-all"
+          aria-label="Settings"
         >
-          <Settings size={15} />
+          <Settings size={16} />
         </button>
       </div>
     </div>

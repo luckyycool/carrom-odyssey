@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Volume2, Music, Vibrate, BookOpen, X, ShieldCheck, Zap } from 'lucide-react';
+import { Volume2, VolumeX, Music, Vibrate, BookOpen, X, ShieldCheck, Zap } from 'lucide-react';
 import type { PlayerSettings } from '../state/gameStore';
 import { sounds } from '../utils/audio';
 import { triggerHaptic, setHapticsIntensity } from '../utils/haptics';
@@ -38,6 +38,18 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     sounds.setVolumes(sfx, val);
     const updated = { ...settings, musicVolume: val };
     onUpdateSettings(updated);
+  };
+
+  const isMasterMuted = sfx === 0 && music === 0;
+
+  const handleToggleMasterMute = () => {
+    if (isMasterMuted) {
+      handleSfxChange(0.8);
+      handleMusicChange(0.5);
+    } else {
+      handleSfxChange(0);
+      handleMusicChange(0);
+    }
   };
 
   const handleHapticsChange = (intensity: 'off' | 'soft' | 'crisp' | 'heavy') => {
@@ -97,44 +109,64 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             </span>
           </div>
 
-          {/* Sound Effects Slider */}
-          <div className="p-3 bg-purple-950/50 rounded-2xl border border-purple-900/40">
-            <div className="flex justify-between items-center mb-1 text-xs font-bold text-purple-200">
-              <span className="flex items-center gap-1.5">
-                <Volume2 size={15} className="text-cyan-400" />
-                Sound Effects (SFX)
+          {/* Master Audio Mute & Sound Controls */}
+          <div className="p-3 bg-purple-950/50 rounded-2xl border border-purple-900/40 space-y-3">
+            <div className="flex items-center justify-between pb-2 border-b border-purple-900/30">
+              <span className="text-xs font-black text-white uppercase tracking-wider flex items-center gap-1.5">
+                {isMasterMuted ? <VolumeX size={16} className="text-rose-400" /> : <Volume2 size={16} className="text-amber-400" />}
+                Master Audio
               </span>
-              <span className="text-cyan-400 font-extrabold">{Math.round(sfx * 100)}%</span>
+              <button
+                onClick={handleToggleMasterMute}
+                className={`px-3 py-1 rounded-xl text-xs font-black transition-all active:scale-95 ${
+                  isMasterMuted
+                    ? 'bg-rose-950/80 border border-rose-600 text-rose-300'
+                    : 'bg-emerald-950/80 border border-emerald-500 text-emerald-300'
+                }`}
+              >
+                {isMasterMuted ? 'MUTED' : 'ENABLED'}
+              </button>
             </div>
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.05"
-              value={sfx}
-              onChange={e => handleSfxChange(parseFloat(e.target.value))}
-              className="w-full h-2.5 bg-purple-900 rounded-lg appearance-none cursor-pointer accent-cyan-400"
-            />
-          </div>
 
-          {/* Background Music Slider */}
-          <div className="p-3 bg-purple-950/50 rounded-2xl border border-purple-900/40">
-            <div className="flex justify-between items-center mb-1 text-xs font-bold text-purple-200">
-              <span className="flex items-center gap-1.5">
-                <Music size={15} className="text-pink-400" />
-                Zen Ambient Music
-              </span>
-              <span className="text-pink-400 font-extrabold">{Math.round(music * 100)}%</span>
+            {/* Sound Effects Slider */}
+            <div>
+              <div className="flex justify-between items-center mb-1 text-xs font-bold text-purple-200">
+                <span className="flex items-center gap-1.5">
+                  <Volume2 size={14} className="text-cyan-400" />
+                  Sound Effects (SFX)
+                </span>
+                <span className="text-cyan-400 font-extrabold">{Math.round(sfx * 100)}%</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.05"
+                value={sfx}
+                onChange={e => handleSfxChange(parseFloat(e.target.value))}
+                className="w-full h-2.5 bg-purple-900 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+              />
             </div>
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.05"
-              value={music}
-              onChange={e => handleMusicChange(parseFloat(e.target.value))}
-              className="w-full h-2.5 bg-purple-900 rounded-lg appearance-none cursor-pointer accent-pink-500"
-            />
+
+            {/* Background Music Slider */}
+            <div>
+              <div className="flex justify-between items-center mb-1 text-xs font-bold text-purple-200">
+                <span className="flex items-center gap-1.5">
+                  <Music size={14} className="text-pink-400" />
+                  Ambient Zen Music
+                </span>
+                <span className="text-pink-400 font-extrabold">{Math.round(music * 100)}%</span>
+              </div>
+              <input
+                type="range"
+                min="0"
+                max="1"
+                step="0.05"
+                value={music}
+                onChange={e => handleMusicChange(parseFloat(e.target.value))}
+                className="w-full h-2.5 bg-purple-900 rounded-lg appearance-none cursor-pointer accent-pink-500"
+              />
+            </div>
           </div>
 
           {/* Haptics Intensity Selector */}
