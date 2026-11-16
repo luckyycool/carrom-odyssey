@@ -8,10 +8,12 @@
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview",
+    "assets": "node scripts/generateAssets.js",
     "cap:sync": "cap sync android",
     "cap:build": "vite build && cap sync android"
   },
   "dependencies": {
+    "@capacitor-community/admob": "^8.4.0",
     "@capacitor/android": "^8.5.2",
     "@capacitor/cli": "^8.5.2",
     "@capacitor/core": "^8.5.2",
@@ -26,10 +28,12 @@
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.7",
+    "@types/sharp": "^0.31.1",
     "@vitejs/plugin-react": "^6.1.1",
     "autoprefixer": "^10.6.1",
     "oxlint": "^1.81.0",
     "postcss": "^8.5.28",
+    "sharp": "^0.35.5",
     "tailwindcss": "^3.4.19",
     "typescript": "~5.8.2",
     "vite": "^8.3.0"

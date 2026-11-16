@@ -139,14 +139,14 @@ export const INITIAL_STRIKERS: StrikerItem[] = [
   {
     id: 'heavy_juggernaut',
     name: 'The Juggernaut',
-    desc: 'Heavy lead core (+30% mass) smashes through puck clusters with unstoppable force.',
+    desc: 'Heavy weighted core smashes through puck clusters with unstoppable force.',
     price: 500,
     unlocked: false,
     color: '#37474F',
     borderColor: '#FFD700',
     mass: 4.2,
     restitution: 0.80,
-    trait: '+30% Mass',
+    trait: 'Heavy Striker',
   },
   {
     id: 'glass_feather',
@@ -163,7 +163,7 @@ export const INITIAL_STRIKERS: StrikerItem[] = [
   {
     id: 'laser_pointer',
     name: 'Gold Crown',
-    desc: 'Gilded tournament striker with 3× extended laser bank-shot trajectory raycast!',
+    desc: 'Gilded tournament striker with 3× extended laser bank-shot aim guide!',
     price: 1500,
     unlocked: false,
     color: '#FFD700',

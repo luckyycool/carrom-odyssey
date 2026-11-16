@@ -218,13 +218,13 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             <div className="flex justify-between items-start z-10">
               <div>
                 <span className="text-xs font-black text-cyan-200 group-hover:text-white">AI Match Duel</span>
-                <p className="text-[9px] text-cyan-400 font-extrabold uppercase mt-0.5">RAYCAST BOT</p>
+                <p className="text-[9px] text-cyan-400 font-extrabold uppercase mt-0.5">SMART AI RIVAL</p>
               </div>
               <div className="w-8 h-8 rounded-xl bg-cyan-600/25 border border-cyan-500/40 text-cyan-300 flex items-center justify-center shadow-sm">
                 <Bot size={16} />
               </div>
             </div>
-            <p className="text-[10px] text-gray-300/90 leading-tight z-10">Smart angle AI with Rookie, Pro & Master tiers</p>
+            <p className="text-[10px] text-gray-300/90 leading-tight z-10">Duel smart AI across Rookie, Pro & Master tiers</p>
           </button>
 
           {/* Daily Trickshot */}

@@ -27,9 +27,9 @@ export const SagaMapScreen: React.FC<SagaMapScreenProps> = ({
   }, []);
 
   const worlds = [
-    { id: 1, name: 'World 1: The Dojo', start: 1, end: 50, color: 'from-amber-500 to-pink-500' },
+    { id: 1, name: 'World 1: Heritage Club', start: 1, end: 50, color: 'from-amber-500 to-pink-500' },
     { id: 2, name: 'World 2: Magnetic Flux', start: 51, end: 150, color: 'from-cyan-500 to-blue-600' },
-    { id: 3, name: 'World 3: Friction & Ice', start: 151, end: 300, color: 'from-teal-400 to-indigo-500' },
+    { id: 3, name: 'World 3: Glazed Marble Arena', start: 151, end: 300, color: 'from-teal-400 to-indigo-500' },
     { id: 4, name: 'World 4: Pinball Bumpers', start: 301, end: 500, color: 'from-orange-500 to-rose-600' },
     { id: 5, name: 'World 5: Singularity Vortex', start: 501, end: 750, color: 'from-purple-500 to-pink-600' },
     { id: 6, name: 'World 6: Grandmaster Odyssey', start: 751, end: 999, color: 'from-amber-400 to-yellow-600' },

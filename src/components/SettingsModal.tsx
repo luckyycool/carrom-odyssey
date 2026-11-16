@@ -175,7 +175,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                     : 'bg-purple-900/60 text-purple-200 border border-purple-800/40'
                 }`}
               >
-                60 FPS (Battery Saver)
+                Standard (60 Hz)
               </button>
               <button
                 onClick={() => handleFpsChange(120)}
@@ -185,7 +185,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                     : 'bg-purple-900/60 text-purple-200 border border-purple-800/40'
                 }`}
               >
-                120 FPS (Ultra Smooth)
+                Ultra Smooth (120 Hz)
               </button>
             </div>
           </div>

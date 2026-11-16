@@ -7,8 +7,10 @@ android {
         applicationId "com.lucky.carromodyssey"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        def vCode = System.getenv("VERSION_CODE") ?: (project.hasProperty("VERSION_CODE") ? project.property("VERSION_CODE") : null)
+        def vName = System.getenv("VERSION_NAME") ?: (project.hasProperty("VERSION_NAME") ? project.property("VERSION_NAME") : null)
+        versionCode vCode ? vCode.toInteger() : 1
+        versionName vName ? vName.toString() : "1.0.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.
@@ -16,8 +18,25 @@ android {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'
         }
     }
+
+    signingConfigs {
+        release {
+            def keystorePath = System.getenv("KEYSTORE_PATH") ?: (project.hasProperty("KEYSTORE_PATH") ? project.property("KEYSTORE_PATH") : null)
+            if (keystorePath != null && file(keystorePath).exists()) {
+                storeFile file(keystorePath)
+                storePassword System.getenv("STORE_PASSWORD") ?: (project.hasProperty("STORE_PASSWORD") ? project.property("STORE_PASSWORD") : null)
+                keyAlias System.getenv("KEY_ALIAS") ?: (project.hasProperty("KEY_ALIAS") ? project.property("KEY_ALIAS") : null)
+                keyPassword System.getenv("KEY_PASSWORD") ?: (project.hasProperty("KEY_PASSWORD") ? project.property("KEY_PASSWORD") : null)
+            }
+        }
+    }
+
     buildTypes {
         release {
+            def keystorePath = System.getenv("KEYSTORE_PATH") ?: (project.hasProperty("KEYSTORE_PATH") ? project.property("KEYSTORE_PATH") : null)
+            if (keystorePath != null && file(keystorePath).exists()) {
+                signingConfig signingConfigs.release
+            }
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

@@ -22,3 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Security & Keystores
+*.jks
+*.keystore
+service-account.json
+.env.production
+.env.local
+

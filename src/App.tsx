@@ -13,6 +13,7 @@ import { CarromBoard } from './game/CarromBoard';
 import { loadGameData, saveGameData, type GameProgress, type PlayerSettings } from './state/gameStore';
 import { sounds } from './utils/audio';
 import { triggerHaptic, setHapticsIntensity } from './utils/haptics';
+import { initNativeAdMob, showRewardedAdMobVideo } from './lib/adMobService';
 
 export default function App() {
   const [data, setData] = useState<GameProgress>(() => loadGameData());
@@ -39,6 +40,11 @@ export default function App() {
   useEffect(() => {
     saveGameData(data);
   }, [data]);
+
+  // Initialize Native AdMob on launch
+  useEffect(() => {
+    initNativeAdMob().catch(() => {});
+  }, []);
 
   // Sync Audio & Haptics settings
   useEffect(() => {
@@ -131,29 +137,47 @@ export default function App() {
 
   // Handle Second Chance Rewarded Ad
   const handleRequestSecondChanceAd = () => {
-    setRewardedAdConfig({
-      isOpen: true,
-      title: 'Second Chance Extra Strikes',
-      desc: 'Watch a quick 5-second video to gain +2 Extra Strikes and keep your game moving!',
-      onReward: () => {
-        setRewardedAdConfig(null);
-        // Restart current round with extra strikes
-        setGameKey(prev => prev + 1);
+    const onReward = () => {
+      setRewardedAdConfig(null);
+      // Restart current round with extra strikes
+      setGameKey(prev => prev + 1);
+    };
+
+    showRewardedAdMobVideo(
+      (granted) => {
+        if (granted) onReward();
       },
-    });
+      () => {
+        setRewardedAdConfig({
+          isOpen: true,
+          title: 'Second Chance Extra Strikes',
+          desc: 'Watch a quick 5-second video to gain +2 Extra Strikes and keep your game moving!',
+          onReward,
+        });
+      }
+    );
   };
 
   // Handle Daily Mystery Chest Ad
   const handleWatchRewardedChest = () => {
-    setRewardedAdConfig({
-      isOpen: true,
-      title: 'Daily Mystery Reward',
-      desc: 'Watch this 5-second video to open your free chest and earn 🪙 150 Coins!',
-      onReward: () => {
-        setData(prev => ({ ...prev, coins: prev.coins + 150 }));
-        setRewardedAdConfig(null);
+    const onReward = () => {
+      setData(prev => ({ ...prev, coins: prev.coins + 150 }));
+      setRewardedAdConfig(null);
+    };
+
+    showRewardedAdMobVideo(
+      (granted) => {
+        if (granted) onReward();
       },
-    });
+      () => {
+        setRewardedAdConfig({
+          isOpen: true,
+          title: 'Daily Mystery Reward',
+          desc: 'Watch this 5-second video to open your free chest and earn 🪙 150 Coins!',
+          onReward,
+        });
+      }
+    );
   };
 
   // Handle Pro Pass Purchase
@@ -186,22 +210,31 @@ export default function App() {
 
   // Handle Rewarded Ad Striker Powder Recharge
   const handleWatchAdForRecharge = (strikerId: string) => {
-    setRewardedAdConfig({
-      isOpen: true,
-      title: 'Striker Powder Refill',
-      desc: 'Watch this 5-second video to gain +10 Powder Matches for your striker!',
-      onReward: () => {
-        setData(prev => ({
-          ...prev,
-          strikerCharges: {
-            ...prev.strikerCharges,
-            [strikerId]: Math.min(30, (prev.strikerCharges[strikerId] || 0) + 10),
-          },
-        }));
-        setRewardedAdConfig(null);
-        triggerHaptic.success();
+    const onReward = () => {
+      setData(prev => ({
+        ...prev,
+        strikerCharges: {
+          ...prev.strikerCharges,
+          [strikerId]: Math.min(30, (prev.strikerCharges[strikerId] || 0) + 10),
+        },
+      }));
+      setRewardedAdConfig(null);
+      triggerHaptic.success();
+    };
+
+    showRewardedAdMobVideo(
+      (granted) => {
+        if (granted) onReward();
       },
-    });
+      () => {
+        setRewardedAdConfig({
+          isOpen: true,
+          title: 'Striker Powder Refill',
+          desc: 'Watch this 5-second video to gain +10 Powder Matches for your striker!',
+          onReward,
+        });
+      }
+    );
   };
 
   // Handle Striker Star Upgrade (Lv 1 to Lv 5)
@@ -245,17 +278,26 @@ export default function App() {
 
   // Handle Double Level Reward Ad (2x Coins)
   const handleRequestDoubleRewardAd = () => {
-    setRewardedAdConfig({
-      isOpen: true,
-      title: 'Double Level Coins (2X)',
-      desc: 'Watch this 5-second video to double your winnings and earn an extra +75 Coins!',
-      onReward: () => {
-        setData(prev => ({ ...prev, coins: prev.coins + 75 }));
-        setRewardedAdConfig(null);
-        sounds.playLevelClear();
-        triggerHaptic.success();
+    const onReward = () => {
+      setData(prev => ({ ...prev, coins: prev.coins + 75 }));
+      setRewardedAdConfig(null);
+      sounds.playLevelClear();
+      triggerHaptic.success();
+    };
+
+    showRewardedAdMobVideo(
+      (granted) => {
+        if (granted) onReward();
       },
-    });
+      () => {
+        setRewardedAdConfig({
+          isOpen: true,
+          title: 'Double Level Coins (2X)',
+          desc: 'Watch this 5-second video to double your winnings and earn an extra +75 Coins!',
+          onReward,
+        });
+      }
+    );
   };
 
   // Handle Lucky Spin Prize Claim
@@ -284,15 +326,24 @@ export default function App() {
 
   // Handle Lucky Spin Extra Ad
   const handleRequestSpinAd = () => {
-    setRewardedAdConfig({
-      isOpen: true,
-      title: 'Lucky Chakra Extra Spin',
-      desc: 'Watch this 5-second video to gain an extra spin on the Fortune Chakra wheel!',
-      onReward: () => {
-        setRewardedAdConfig(null);
-        setData(prev => ({ ...prev, lastSpinDate: '' }));
+    const onReward = () => {
+      setRewardedAdConfig(null);
+      setData(prev => ({ ...prev, lastSpinDate: '' }));
+    };
+
+    showRewardedAdMobVideo(
+      (granted) => {
+        if (granted) onReward();
       },
-    });
+      () => {
+        setRewardedAdConfig({
+          isOpen: true,
+          title: 'Lucky Chakra Extra Spin',
+          desc: 'Watch this 5-second video to gain an extra spin on the Fortune Chakra wheel!',
+          onReward,
+        });
+      }
+    );
   };
 
   // Handle Achievements
