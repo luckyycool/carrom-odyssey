@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">Carrom Odyssey</string>
     <string name="title_activity_main">Carrom Odyssey</string>
-    <string name="package_name">com.lucky.carromodyssey</string>
-    <string name="custom_url_scheme">com.lucky.carromodyssey</string>
+    <string name="package_name">com.games.carromodyssey</string>
+    <string name="custom_url_scheme">com.games.carromodyssey</string>
 </resources>

@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.lucky.carromodyssey',
+  appId: 'com.games.carromodyssey',
   appName: 'Carrom Odyssey',
   webDir: 'dist',
   server: {

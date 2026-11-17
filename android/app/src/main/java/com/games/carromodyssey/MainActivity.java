@@ -1,4 +1,4 @@
-package com.lucky.carromodyssey;
+package com.games.carromodyssey;
 
 import com.getcapacitor.BridgeActivity;
 

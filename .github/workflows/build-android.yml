@@ -230,7 +230,7 @@ jobs:
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJson: service-account.json
-          packageName: com.lucky.carromodyssey
+          packageName: com.games.carromodyssey
           releaseFiles: android/app/build/outputs/bundle/release/*.aab
           mappingFile: ${{ env.MAPPING_FILE }}
           track: ${{ github.event.inputs.playstore_track || 'internal' }}
@@ -241,7 +241,7 @@ jobs:
         uses: r0adkll/upload-google-play@v1
         with:
           serviceAccountJson: service-account.json
-          packageName: com.lucky.carromodyssey
+          packageName: com.games.carromodyssey
           releaseFiles: android/app/build/outputs/bundle/release/*.aab
           mappingFile: ${{ env.MAPPING_FILE }}
           track: ${{ github.event.inputs.playstore_track || 'internal' }}

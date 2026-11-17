@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace = "com.lucky.carromodyssey"
+    namespace = "com.games.carromodyssey"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.lucky.carromodyssey"
+        applicationId "com.games.carromodyssey"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         def vCode = System.getenv("VERSION_CODE") ?: (project.hasProperty("VERSION_CODE") ? project.property("VERSION_CODE") : null)
