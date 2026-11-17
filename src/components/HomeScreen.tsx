@@ -195,7 +195,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           </div>
         </button>
 
-        {/* Daily Trickshot / Daily Puzzle */}
+        {/* Daily Puzzle */}
         <button
           onClick={() => {
             triggerHaptic.light();
@@ -207,16 +207,11 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             <Calendar size={20} />
           </div>
           <div className="flex flex-col">
-            <div className="flex items-center gap-1">
-              <span className="text-sm font-black text-white group-hover:text-amber-300 transition-colors leading-tight">
-                Trickshot
-              </span>
-              <span className="text-[9px] px-1 py-0.2 rounded bg-emerald-950 border border-emerald-500/50 text-emerald-300 font-black">
-                +150 🪙
-              </span>
-            </div>
-            <span className="text-[11px] font-extrabold text-emerald-300">
+            <span className="text-sm font-black text-white group-hover:text-amber-300 transition-colors leading-tight">
               Daily Puzzle
+            </span>
+            <span className="text-[11px] font-extrabold text-amber-300 flex items-center gap-1">
+              🪙 +150 Coins
             </span>
           </div>
         </button>
