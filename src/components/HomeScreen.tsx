@@ -128,19 +128,22 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           triggerHaptic.light();
           onOpenLuckySpin();
         }}
-        className="w-full px-4 py-3 rounded-2xl bg-gradient-to-r from-amber-600/25 via-yellow-600/15 to-orange-600/25 border border-amber-400/40 flex items-center justify-between active:scale-98 transition-all shadow-md group cursor-pointer"
+        className="w-full px-4 py-2.5 rounded-2xl bg-gradient-to-r from-amber-600/25 via-yellow-600/15 to-orange-600/25 border border-amber-400/40 flex items-center justify-between active:scale-98 transition-all shadow-md group cursor-pointer"
       >
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 to-yellow-300 text-amber-950 flex items-center justify-center font-black shadow-md group-hover:rotate-45 transition-transform duration-500 text-xl">
             🎡
           </div>
-          <div className="flex items-center gap-2">
-            <span className="text-sm font-black text-amber-300">Lucky Fortune Chakra</span>
-            {canSpinFree && (
-              <span className="px-2 py-0.5 rounded-full bg-emerald-500 text-[9px] font-black text-white animate-pulse">
-                FREE
-              </span>
-            )}
+          <div className="flex flex-col text-left">
+            <div className="flex items-center gap-1.5">
+              <span className="text-sm font-black text-amber-300">Lucky Chakra</span>
+              {canSpinFree && (
+                <span className="px-1.5 py-0.2 rounded-full bg-emerald-500 text-[9px] font-black text-white animate-pulse">
+                  FREE
+                </span>
+              )}
+            </div>
+            <span className="text-[11px] font-bold text-amber-200/80">Spin & Win Rewards</span>
           </div>
         </div>
         <span className="text-xs font-black text-amber-300 px-3 py-1.5 rounded-xl bg-amber-950/80 border border-amber-500/40 group-hover:bg-amber-500 group-hover:text-amber-950 transition-all">
@@ -148,73 +151,95 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         </span>
       </button>
 
-      {/* Game Modes (2x2 Grid - Pure Arcade, Zero Sentence Paragraphs) */}
+      {/* Game Modes (2x2 Grid - 2-Line Game Format, Punchy & Fancy) */}
       <div className="grid grid-cols-2 gap-2.5">
-        {/* 1v1 Pass & Play */}
+        {/* 1 vs 1 / Pass & Play */}
         <button
           onClick={() => {
             triggerHaptic.light();
             onStartPassAndPlay();
           }}
-          className="p-3.5 rounded-2xl bg-gradient-to-br from-[#2b1016] to-[#170a0e] border border-rose-700/40 hover:border-rose-500/70 text-left transition-all active:scale-95 flex items-center gap-3 shadow-md group cursor-pointer"
+          className="p-3 rounded-2xl bg-gradient-to-br from-[#2b1016] to-[#170a0e] border border-rose-700/40 hover:border-rose-500/70 text-left transition-all active:scale-95 flex items-center gap-2.5 shadow-md group cursor-pointer"
         >
           <div className="w-10 h-10 rounded-xl bg-rose-600/25 border border-rose-500/40 text-rose-300 flex items-center justify-center shadow-sm shrink-0">
             <Users size={20} />
           </div>
-          <span className="text-xs font-black text-white group-hover:text-amber-300 transition-colors">
-            1v1 Pass & Play
-          </span>
+          <div className="flex flex-col">
+            <span className="text-sm font-black text-white group-hover:text-amber-300 transition-colors leading-tight">
+              1 vs 1
+            </span>
+            <span className="text-[11px] font-extrabold text-rose-300">
+              Pass & Play
+            </span>
+          </div>
         </button>
 
-        {/* AI Match Duel */}
+        {/* AI Match Duel / Quick Match */}
         <button
           onClick={() => {
             triggerHaptic.light();
             onStartAiMatch();
           }}
-          className="p-3.5 rounded-2xl bg-gradient-to-br from-[#0c1f2d] to-[#07111a] border border-cyan-700/40 hover:border-cyan-500/70 text-left transition-all active:scale-95 flex items-center gap-3 shadow-md group cursor-pointer"
+          className="p-3 rounded-2xl bg-gradient-to-br from-[#0c1f2d] to-[#07111a] border border-cyan-700/40 hover:border-cyan-500/70 text-left transition-all active:scale-95 flex items-center gap-2.5 shadow-md group cursor-pointer"
         >
           <div className="w-10 h-10 rounded-xl bg-cyan-600/25 border border-cyan-500/40 text-cyan-300 flex items-center justify-center shadow-sm shrink-0">
             <Bot size={20} />
           </div>
-          <span className="text-xs font-black text-white group-hover:text-amber-300 transition-colors">
-            AI Match Duel
-          </span>
+          <div className="flex flex-col">
+            <span className="text-sm font-black text-white group-hover:text-amber-300 transition-colors leading-tight">
+              AI Duel
+            </span>
+            <span className="text-[11px] font-extrabold text-cyan-300">
+              Quick Match
+            </span>
+          </div>
         </button>
 
-        {/* Daily Trickshot */}
+        {/* Daily Trickshot / Daily Puzzle */}
         <button
           onClick={() => {
             triggerHaptic.light();
             onStartDailyTrickshot();
           }}
-          className="p-3.5 rounded-2xl bg-gradient-to-br from-[#0e2617] to-[#08150d] border border-emerald-600/40 hover:border-emerald-500/70 text-left transition-all active:scale-95 flex items-center gap-3 shadow-md group cursor-pointer"
+          className="p-3 rounded-2xl bg-gradient-to-br from-[#0e2617] to-[#08150d] border border-emerald-600/40 hover:border-emerald-500/70 text-left transition-all active:scale-95 flex items-center gap-2.5 shadow-md group cursor-pointer"
         >
           <div className="w-10 h-10 rounded-xl bg-emerald-600/25 border border-emerald-500/40 text-emerald-300 flex items-center justify-center shadow-sm shrink-0">
             <Calendar size={20} />
           </div>
           <div className="flex flex-col">
-            <span className="text-xs font-black text-white group-hover:text-amber-300 transition-colors">
-              Daily Trickshot
+            <div className="flex items-center gap-1">
+              <span className="text-sm font-black text-white group-hover:text-amber-300 transition-colors leading-tight">
+                Trickshot
+              </span>
+              <span className="text-[9px] px-1 py-0.2 rounded bg-emerald-950 border border-emerald-500/50 text-emerald-300 font-black">
+                +150 🪙
+              </span>
+            </div>
+            <span className="text-[11px] font-extrabold text-emerald-300">
+              Daily Puzzle
             </span>
-            <span className="text-[10px] text-emerald-400 font-extrabold">🪙 +150</span>
           </div>
         </button>
 
-        {/* Zen Sandbox Practice */}
+        {/* Zen Sandbox Practice / Free Practice */}
         <button
           onClick={() => {
             triggerHaptic.light();
             onStartZenMode();
           }}
-          className="p-3.5 rounded-2xl bg-gradient-to-br from-[#25102d] to-[#130718] border border-purple-600/40 hover:border-purple-500/70 text-left transition-all active:scale-95 flex items-center gap-3 shadow-md group cursor-pointer"
+          className="p-3 rounded-2xl bg-gradient-to-br from-[#25102d] to-[#130718] border border-purple-600/40 hover:border-purple-500/70 text-left transition-all active:scale-95 flex items-center gap-2.5 shadow-md group cursor-pointer"
         >
           <div className="w-10 h-10 rounded-xl bg-purple-600/25 border border-purple-500/40 text-purple-300 flex items-center justify-center shadow-sm shrink-0">
             <Zap size={20} />
           </div>
-          <span className="text-xs font-black text-white group-hover:text-amber-300 transition-colors">
-            Zen Free-Play
-          </span>
+          <div className="flex flex-col">
+            <span className="text-sm font-black text-white group-hover:text-amber-300 transition-colors leading-tight">
+              Zen Mode
+            </span>
+            <span className="text-[11px] font-extrabold text-purple-300">
+              Free Practice
+            </span>
+          </div>
         </button>
       </div>
 
@@ -225,13 +250,16 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             triggerHaptic.light();
             onOpenRulebook();
           }}
-          className="flex-1 p-3 rounded-2xl bg-[#1b1226] border border-purple-800/40 hover:border-amber-500/40 flex items-center justify-between active:scale-95 transition-all shadow-sm cursor-pointer"
+          className="flex-1 p-2.5 rounded-2xl bg-[#1b1226] border border-purple-800/40 hover:border-amber-500/40 flex items-center justify-between active:scale-95 transition-all shadow-sm cursor-pointer"
         >
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl bg-pink-600/20 text-pink-400 flex items-center justify-center">
               <BookOpen size={16} />
             </div>
-            <p className="font-bold text-xs text-white">Rulebook</p>
+            <div className="flex flex-col text-left">
+              <span className="font-bold text-xs text-white">Rulebook</span>
+              <span className="text-[10px] text-pink-300 font-semibold">Official Laws</span>
+            </div>
           </div>
           <ChevronRight size={14} className="text-gray-400" />
         </button>
@@ -241,13 +269,16 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
             triggerHaptic.light();
             onOpenShop();
           }}
-          className="flex-1 p-3 rounded-2xl bg-[#1b1226] border border-purple-800/40 hover:border-amber-500/40 flex items-center justify-between active:scale-95 transition-all shadow-sm cursor-pointer"
+          className="flex-1 p-2.5 rounded-2xl bg-[#1b1226] border border-purple-800/40 hover:border-amber-500/40 flex items-center justify-between active:scale-95 transition-all shadow-sm cursor-pointer"
         >
           <div className="flex items-center gap-2.5">
             <div className="w-8 h-8 rounded-xl bg-amber-600/20 text-amber-400 flex items-center justify-center">
               <ShoppingBag size={16} />
             </div>
-            <p className="font-bold text-xs text-white">Locker & Shop</p>
+            <div className="flex flex-col text-left">
+              <span className="font-bold text-xs text-white">Locker & Shop</span>
+              <span className="text-[10px] text-amber-300 font-semibold">Custom Gear</span>
+            </div>
           </div>
           <ChevronRight size={14} className="text-gray-400" />
         </button>
